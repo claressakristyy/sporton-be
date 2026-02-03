@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import Category from "../models/category.model"; 
 import Product from "../models/product.model";
 
 export const createProduct = async (req: Request, res: Response): Promise<void> => {
@@ -19,7 +20,7 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
 
 export const getProducts = async (req: Request, res: Response): Promise<void> => {
     try {
-        const products = await Product.find().populate("category").sort({cratedAt: -1})
+        const products = await Product.find().populate("category").sort({createdAt: -1})
         res.status(200).json(products)
     } catch(error) {
         res.status(500).json({message: "Error fetching products", error})
